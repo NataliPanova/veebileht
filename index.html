@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div class="topnav">
+        <a id="main-page-nav" class="active" onclick="showPage('main-page')">Pealeht</a>
+        <a id="search-page-nav" onclick="showPage('search-page')">Otsing</a>
+        <a id="contact-page-nav" onclick="showPage('contact-page')">Meist</a>
+    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Page</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="main-page" class="main-page">
+        <h1>Pealeht</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non mauris tincidunt lectus egestas bibendum ac quis metus. Praesent dui neque, efficitur vel dignissim gravida, ornare nec neque. Donec at dolor in ex tincidunt dictum sed vitae lorem. Cras a euismod urna. Integer a imperdiet nibh, non ultricies ipsum. Nam magna mauris, lobortis sit amet lorem quis, tristique sagittis nisi. Praesent congue urna scelerisque ligula placerat finibus. Aenean in pretium dui, eget porta sapien. Aliquam sed fermentum ante. Aenean consequat vel ex vitae accumsan. Suspendisse turpis sem, bibendum non erat in, congue eleifend urna. Donec non nisl eleifend, luctus risus pulvinar, tempus est. Cras sagittis urna vitae felis pellentesque pharetra. Phasellus scelerisque mattis felis, a mattis ex rhoncus at. Sed eget sodales purus, ut suscipit nisi. Integer vestibulum quam est, vel venenatis ex consequat eget.
+
+Phasellus sagittis in arcu id faucibus. Ut euismod lacus in risus dapibus, tincidunt blandit mi luctus. In et ipsum congue, vestibulum arcu sed, congue massa. Nam tempus et tellus malesuada interdum. In urna sem, aliquam a rhoncus ac, pretium nec erat. Morbi id pulvinar tortor. In ullamcorper tristique nulla. Vestibulum eu velit luctus, feugiat nibh eget, tempus est. Nunc accumsan efficitur vehicula. Integer maximus sollicitudin lectus ultricies porttitor. Suspendisse quis magna sodales, rhoncus odio convallis, congue ipsum.
+
+Donec quis porta sem. Vivamus nisl ipsum, semper a nulla ut, ullamcorper aliquet lectus. Phasellus at libero vitae magna iaculis interdum. Sed felis sapien, commodo sit amet arcu id, tempus interdum magna. Phasellus lorem nunc, rutrum et tempor a, dictum et nunc. Pellentesque id pretium nisi. Ut tristique eu metus nec dapibus. Maecenas pretium, nulla vel lobortis tempor, orci nisl consectetur justo, vel porta urna erat quis tellus. Quisque ornare velit neque, et faucibus nisi lobortis at. Etiam sed dui nunc. Suspendisse faucibus scelerisque massa, ornare molestie ligula hendrerit at.
+
+Suspendisse vulputate faucibus erat, in commodo nulla tempor sit amet. Fusce cursus fermentum purus luctus feugiat. Aenean libero nunc, bibendum sit amet volutpat efficitur, blandit et nibh. Aliquam semper, felis at convallis gravida, ex felis gravida dui, non sagittis ante est non massa. Etiam ultricies facilisis suscipit. Phasellus maximus, nibh quis luctus porttitor, nulla tellus tempus nunc, quis consequat erat felis varius nunc. Praesent neque tellus, dictum at pellentesque ac, condimentum malesuada orci. Vestibulum vitae orci vitae dui mattis facilisis. Vestibulum velit tortor, varius gravida auctor in, pretium sit amet dui. Donec gravida posuere tellus finibus malesuada. Donec luctus nibh vitae aliquam porttitor. Pellentesque venenatis ultricies ante, in ultrices neque iaculis in. Sed quis lorem dapibus, posuere nulla ut, molestie dolor. Sed sed nulla nisi. Ut varius odio nisl, nec pretium quam volutpat sed. Cras molestie congue urna eget molestie.
+
+Aliquam nec erat sed purus molestie lobortis eu at ligula. Sed porttitor lacinia purus, gravida ullamcorper massa volutpat sit amet. Quisque a vulputate tortor, eu viverra ante. Phasellus et neque a purus imperdiet lacinia. In hac habitasse platea dictumst. Proin lorem lacus, mollis porttitor pretium sagittis, mattis a lacus. Praesent eget interdum sem, non cursus quam.
+
+</p>
+    </div>
+    <div id="search-page" class="search-page hidden">
+        <h1>Otsing</h1>
+        <div class="search-layout">
+            <aside class="search-sidebar">
+                <label for="search-input">Otsi</label>
+                <input id="search-input" type="search" placeholder="Sisesta otsingusõna...">
+                <div class="search-filters" aria-label="Filtrid">
+                    <button type="button">Kõik</button>
+                    <button type="button">Uuemad</button>
+                    <button type="button">Populaarsed</button>
+                    <button type="button">Kategooria</button>
+                </div>
+            </aside>
+            <div class="search-results" aria-label="Otsingutulemused">
+                <article class="search-result">
+                    <h2>Tulemus 1</h2>
+                    <p>Siin kuvatakse otsingutulemuse lühike kirjeldus ja lisainfo.</p>
+                </article>
+                <article class="search-result">
+                    <h2>Tulemus 2</h2>
+                    <p>See on veel üks näidistulemus koos lühikese tekstikirjeldusega.</p>
+                </article>
+                <article class="search-result">
+                    <h2>Tulemus 3</h2>
+                    <p>Otsingutulemused on paigutatud pikkadesse ribadesse, mida saab kerida.</p>
+                </article>
+                <article class="search-result">
+                    <h2>Tulemus 4</h2>
+                    <p>Siia saab lisada rohkem sisu, kui päris otsingutulemused on olemas.</p>
+                </article>
+                <article class="search-result">
+                    <h2>Tulemus 5</h2>
+                    <p>Näidis tulemustest keritava loendi jaoks.</p>
+                </article>
+            </div>
+        </div>
+    </div>
+    <div id="contact-page" class="contact-page hidden">
+        <h1>Meist</h1>
+        <div class="contact-info">
+            <p>Kes me oleme</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non mauris tincidunt lectus egestas bibendum ac quis metus. Praesent dui neque, efficitur vel dignissim gravida, ornare nec neque. Donec at dolor in ex tincidunt dictum sed vitae lorem. Cras a euismod urna. Integer a imperdiet nibh, non ultricies ipsum. Nam magna mauris, lobortis sit amet lorem quis, tristique sagittis nisi. Praesent congue urna scelerisque ligula placerat finibus. Aenean in pretium dui, eget porta sapien. Aliquam sed fermentum ante. Aenean consequat vel ex vitae accumsan. Suspendisse turpis sem, bibendum non erat in, congue eleifend urna. Donec non nisl eleifend, luctus risus pulvinar, tempus est. Cras sagittis urna vitae felis pellentesque pharetra. Phasellus scelerisque mattis felis, a mattis ex rhoncus at. Sed eget sodales purus, ut suscipit nisi. Integer vestibulum quam est, vel venenatis ex consequat eget.
+
+Phasellus sagittis in arcu id faucibus. Ut euismod lacus in risus dapibus, tincidunt blandit mi luctus. In et ipsum congue, vestibulum arcu sed, congue massa. Nam tempus et tellus malesuada interdum. In urna sem, aliquam a rhoncus ac, pretium nec erat. Morbi id pulvinar tortor. In ullamcorper tristique nulla. Vestibulum eu velit luctus, feugiat nibh eget, tempus est. Nunc accumsan efficitur vehicula. Integer maximus sollicitudin lectus ultricies porttitor. Suspendisse quis magna sodales, rhoncus odio convallis, congue ipsum.
+
+Donec quis porta sem. Vivamus nisl ipsum, semper a nulla ut, ullamcorper aliquet lectus. Phasellus at libero vitae magna iaculis interdum. Sed felis sapien, commodo sit amet arcu id, tempus interdum magna. Phasellus lorem nunc, rutrum et tempor a, dictum et nunc. Pellentesque id pretium nisi. Ut tristique eu metus nec dapibus. Maecenas pretium, nulla vel lobortis tempor, orci nisl consectetur justo, vel porta urna erat quis tellus. Quisque ornare velit neque, et faucibus nisi lobortis at. Etiam sed dui nunc. Suspendisse faucibus scelerisque massa, ornare molestie ligula hendrerit at.
+
+Suspendisse vulputate faucibus erat, in commodo nulla tempor sit amet. Fusce cursus fermentum purus luctus feugiat. Aenean libero nunc, bibendum sit amet volutpat efficitur, blandit et nibh. Aliquam semper, felis at convallis gravida, ex felis gravida dui, non sagittis ante est non massa. Etiam ultricies facilisis suscipit. Phasellus maximus, nibh quis luctus porttitor, nulla tellus tempus nunc, quis consequat erat felis varius nunc. Praesent neque tellus, dictum at pellentesque ac, condimentum malesuada orci. Vestibulum vitae orci vitae dui mattis facilisis. Vestibulum velit tortor, varius gravida auctor in, pretium sit amet dui. Donec gravida posuere tellus finibus malesuada. Donec luctus nibh vitae aliquam porttitor. Pellentesque venenatis ultricies ante, in ultrices neque iaculis in. Sed quis lorem dapibus, posuere nulla ut, molestie dolor. Sed sed nulla nisi. Ut varius odio nisl, nec pretium quam volutpat sed. Cras molestie congue urna eget molestie.
+
+Aliquam nec erat sed purus molestie lobortis eu at ligula. Sed porttitor lacinia purus, gravida ullamcorper massa volutpat sit amet. Quisque a vulputate tortor, eu viverra ante. Phasellus et neque a purus imperdiet lacinia. In hac habitasse platea dictumst. Proin lorem lacus, mollis porttitor pretium sagittis, mattis a lacus. Praesent eget interdum sem, non cursus quam.
+
+</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
