@@ -107,3 +107,18 @@ body {
     .search-layout { grid-template-columns: 1fr; }
     .search-results { max-height: 360px; }
 }
+
+.gallery {
+    display: flex; 
+    gap: 50px;     
+    align-items: center; 
+    width: 80%;
+    margin: 100px auto 0;
+
+
+}
+
+.gallery img {
+  max-width: 500px; 
+  height: auto;     
+}
