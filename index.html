@@ -24,9 +24,67 @@
         <h1>Tere tulemast!</h1>
     </section>
 
-    <p>
-        ...
-    </p>
+<div class="gallery">
+        <img src="chicken.jpg" alt="Pilt 1" class="my-image" 
+             data-title="Krõbe kana" 
+             data-desc="" 
+             data-steps="1. <br>2.<br>3. ">
+             
+        <img src="pizza.jpg" alt="Pilt 2" class="my-image" 
+             data-title="Pitsa" 
+             data-desc="Kiire pitsa näljasele tudengile." 
+             data-steps="1. <br>2. <br>3. ">
+             
+        <img src="salad.jpg" alt="Pilt 3" class="my-image" 
+             data-title="Caesari salat" 
+             data-desc="Tervislik ja odav salat." 
+             data-steps="1.<br>2. <br>3. ">
+    </div>
+
+<dialog id="recipeModal">
+        <form method="dialog">
+            <button class="close-btn">×</button>
+        </form>
+        <h2 id="modalTitle">Retsept</h2>
+        <h3>Kirjeldus:</h3>
+        <p id="modalDesc">Kijeldus</p>
+        <h3>Step by step:</h3>
+        <p id="modalSteps">Step by step</p>
+    </dialog>
+
+    </div>
+
+<script>
+    const modal = document.getElementById('recipeModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalSteps = document.getElementById('modalSteps');
+
+
+    document.querySelectorAll('.my-image').forEach(img => {
+        img.addEventListener('click', () => {
+            
+            modalTitle.textContent = img.getAttribute('data-title');
+            modalDesc.textContent = img.getAttribute('data-desc');
+            
+            modalSteps.innerHTML = img.getAttribute('data-steps');
+            
+            // Открываем окно
+            modal.showModal();
+        });
+    });
+</script>
+
+
+
 </div>
+
+
+<div class="aluminenupp">
+   
+    <a href="otsing.html">Avasta uued maitsed!</a>
+
+</div>
+
 
 </body>

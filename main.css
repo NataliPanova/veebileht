@@ -83,6 +83,13 @@ body {
     border-radius: 16px;
     background: white;
 }
+
+.search-filters button:hover {
+    background-color: #d5883a;
+    color: white;
+    cursor: pointer;
+}
+
 .search-results {
     max-height: 420px;
     overflow-y: auto;
@@ -106,4 +113,68 @@ body {
 @media (max-width: 600px) {
     .search-layout { grid-template-columns: 1fr; }
     .search-results { max-height: 360px; }
+}
+
+.gallery {
+    display: flex; 
+    gap: 50px;     
+    align-items: center; 
+    width: 80%;
+    margin: 100px auto 0;
+
+
+}
+
+.gallery img {
+  max-width: 500px; 
+  height: auto;     
+}
+
+.my-image {
+      cursor: pointer;
+    
+      border-radius: 8px;
+    }
+    
+dialog {
+      border: none;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+.aluminenupp {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin: 50px auto 0 auto;
+}
+
+    .aluminenupp a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+
+.aluminenupp a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.prevent-select {
+  -webkit-user-select: none; 
+  -ms-user-select: none; 
+  user-select: none; 
+}
+
+
+.aluminenupp a.active {
+    background-color: #d5883a;
+    color: white;
 }
