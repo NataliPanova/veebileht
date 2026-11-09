@@ -170,10 +170,22 @@
             </div>
         </div>
 
-        <div class="search-results">
-            <!-- tulemused -->
-        </div>
-    </div>
-</div>
+<dialog id="recipeModal">
+    <form method="dialog">
+        <button class="close-btn" aria-label="Sulge">×</button>
+    </form>
 
+    <h2 id="modalTitle"></h2>
+
+    <h3>Kirjeldus</h3>
+    <p id="modalDesc"></p>
+
+    <h3>Koostisosad</h3>
+    <ul id="modalIngredients"></ul>
+
+    <h3>Valmistamine</h3>
+    <ol id="modalSteps"></ol>
+</dialog>
+
+<script src="script.js"></script>
 </body>

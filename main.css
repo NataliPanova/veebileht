@@ -178,3 +178,52 @@ dialog {
     background-color: #d5883a;
     color: white;
 }
+
+/* disaini saab muuta prst, see popup disain*/
+
+.search-result {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.search-result:hover {
+    border-color: #d5883a;
+    background-color: #fff5ef;
+}
+
+#recipeModal {
+    width: 80%;
+    max-width: 650px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background-color: #fff5ef;
+    color: #333;
+    border: 2px solid #ecad6f;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+#recipeModal: :backdrop {
+    background-color: rgba(51, 51, 51, 0.6);
+}
+
+#recipeModal h2 {
+    color: #d5883a;
+}
+
+#recipeModal h3 {
+    color: #333;
+}
+
+.close-btn {
+    float: right;
+    border: none;
+    background: none;
+    color: #333;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.close.btn:hover {
+    color: #d5883a;
+}
