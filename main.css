@@ -110,6 +110,15 @@ body {
     margin: 0;
     color: #475569;
 }
+.search-page {
+    padding: 20px;
+    margin: 0 auto;
+    min-height: 85vh;
+}
+
+.search-results {
+    min-height: 75vh;
+}
 @media (max-width: 600px) {
     .search-layout { grid-template-columns: 1fr; }
     .search-results { max-height: 360px; }

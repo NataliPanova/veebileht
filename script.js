@@ -13,7 +13,7 @@ function showPage(pageId) {
     });
     document.querySelector(`.topnav a#${pageId}-nav`).classList.add('active');
 }
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("recipeModal");
 
     //Kui pole lehel pop upi siis lõpp
@@ -25,8 +25,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Leiab kõik otsingutulemused
     const tulemused = document.querySelectorAll(".search-result");
 
-    tulemused.forEach(function(tulemus) {
-        tulemus.addEventListener("click", function() {
+    tulemused.forEach(function (tulemus) {
+        tulemus.addEventListener("click", function () {
 
             // Võtab vajutatud retsepti nime ja kirjelduse
             const nimi = tulemus.querySelector("h2").textContent;
@@ -54,7 +54,7 @@ function filterResults() {
         const description = result.querySelector("p").textContent.toLowerCase();
         const nameDistance = levenshteinDistance(filter, name);
         // Set a threshold for the Levenshtein distance
-        const threshold = 2; 
+        const threshold = 2;
         let matchFound = false;
         name.split(" ").forEach(word => {
             const wordDistance = levenshteinDistance(filter, word);
@@ -95,3 +95,63 @@ function levenshteinDistance(s1, s2) {
     }
     return matrix[s2.length][s1.length];
 }
+
+
+// Parse recipes from Google Sheets CSV
+function parseCSV() {
+    const resultsContainer = document.getElementById("search-results");
+
+    if (!resultsContainer) {
+        console.error("Could not find #search-results");
+        return;
+    }
+
+    fetch("https://docs.google.com/spreadsheets/d/1mGjZjhe90vcSgpoC84J7pNtXFJRvRjdU9arfNAF4q4A/export?format=csv")
+        .then(response => response.text())
+        .then(csv => {
+            // Properly parse CSV, including commas and line breaks
+            const parsed = Papa.parse(csv, {
+                header: true,
+                skipEmptyLines: true,
+                transformHeader: header => header.trim().replace(/^\uFEFF/, "")
+            });
+
+            if (parsed.errors.length) {
+                console.warn("CSV parsing warnings:", parsed.errors);
+            }
+
+            // Clear previous results
+            resultsContainer.replaceChildren();
+
+            // Generate HTML for every recipe
+            parsed.data.forEach(recipe => {
+                // create a new article element for each recipe and append it to the results container
+                // Skip rows without a recipe name
+                const nimi = recipe["Nimi"]?.trim();
+
+                if (!nimi) return;
+
+                const kirjeldus = recipe["Kirjeldus"]?.trim() || "";
+
+                const resultElement = document.createElement("article");
+                resultElement.classList.add("search-result");
+
+                const titleElement = document.createElement("h2");
+                titleElement.textContent = nimi;
+
+                const descElement = document.createElement("p");
+                descElement.textContent = kirjeldus;
+
+                resultElement.append(
+                    titleElement,
+                    descElement
+                );
+
+                resultsContainer.appendChild(resultElement);
+            });
+        })
+}
+
+// Load recipes when the page loads
+parseCSV();
+

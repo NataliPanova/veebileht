@@ -7,6 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Krõbedad tudengid</title>
         <link rel="stylesheet" href="main.css">
+        <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<script src="script.js" defer></script>
 </head>
 
 <body>
@@ -32,8 +34,11 @@
                 oninput="filterResults()"
             >
 
+            
+            <div id="btn" class="right">
             <div class="search-filters">
-                <button>Kõik</button>
+                
+                <button><i class="fa-solid fa-plane"></i></button>
                 <button>Soolane</button>
                 <button>Magus</button>
                 <button>Soe</button>
@@ -46,126 +51,10 @@
 
         </aside>
 
-        <div class="search-results" aria-label="Otsingutulemused">
+        <div class="search-results" id="search-results" aria-label="Otsingutulemused">
                     <article class="search-result">
-                        <h2>5-minutiline kananuudlisupp</h2>
-                        <p>Selle naeruväärselt lihtsa kananuudlisupi valmistamiseks on vaja vaid nelja koostisosa ja viit minutit! Lisa soovi korral lisandit, et viia maitse täiesti uuele tasemele!</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Ahjukartulid kanafileega</h2>
-                        <p>Krõbedad ahjukartulid ja mahlane kanafilee, mis moodustavad lihtsa, toitva ja maitsva õhtusöögi.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>All Berry Bang smuuti</h2>
-                        <p>Lihtne retsept Boosti All Berry Bang smuuti tegemiseks kodus.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Caesari salat</h2>
-                        <p>Caesari salat kanalihaga.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Chia puding</h2>
-                        <p>Lihtne ja maitsev chia pudingu retsept!</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Choritzo-pannipitsad</h2>
-                        <p>Nende lihtsate pannipitsade valmistamine võtab algusest lõpuni vaid mõne minuti. Ei pea ootama, kuni tainas kerkib, ega ahju eelsoojendama. Täiuslik kiirtoit.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Kanavrapp</h2>
-                        <p>Lihtne retsept maitsva kanavrapi valmistamiseks. Valmib kokku 6 portsjonit ehk 6 vrappi.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Hommikuvõileib</h2>
-                        <p>
-                            Hommikuvõileiva retsept, mis on ülilihtne ja üllatavalt imeliselt maitsev!
-                            </p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Makroonid</h2>
-                        <p>Isetehtud makroonid, mille maitse on parem kui poeletilt leitavate!</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Pehmed küpsised</h2>
-                        <p>Pehme koduse küpsise retsept, mis on täpselt nii maitsev nagu see välja näeb!</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Kodused kotletid</h2>
-                        <p>Retsept maitsvate ja mahlaste kotlettide valmistamiseks. Maitsvaimad kotletid saab sea- ja veisehakkliha segust.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Miso supp</h2>
-                        <p>Kõige kergem retsept aasiapärase miso supi valmistamiseks.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>French toast</h2>
-                        <p>Ideaalne viis midagi kerget ja magusat valmistada - french toast!</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Omlett singi ja juustuga</h2>
-                        <p>Valkuderikas ja maitsev hommikusöök singi ning sulava juustuga.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Krõbe magushapu kana</h2>
-                        <p>Krõbekana retsept, mis sarnaneb rooga, mida pakutakse Hiina restoraanides. </p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Tiramisu</h2>
-                        <p>Klassikaline itaalia magusroog.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Pelmeenid</h2>
-                        <p>Kas praetud või keedetud? Vali ise!</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Praetud riis munaga</h2>
-                        <p>Maitsev ja lihtne roog, mis aitab eelmisest päevast üle jäänud riisi ära kasutada.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Kaerahelbepuder banaaniga</h2>
-                        <p>Toitev ja tervislik hommikusöök banaani ning kaerahelvestega, mis annab energiat terveks päevaks.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Bolognese pasta</h2>
-                        <p>Traditsiooniline bolognese kaste hakklihast, köögiviljadest ja tomatitest.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Küpsise-jogurtitort</h2>
-                        <p>Lihtne ja populaarne küpsise-jogurtitort, mis ei vaja küpsetamist ning valmib kiiresti.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Lihtne pärmita pitsa</h2>
-                        <p>Värskelt küpsetatud pitsa maitseb suurepäraselt, ja see kiire jogurtipitsa tainas, milles ei ole pärmi, ei nõua taina kerkimise ootamist. Lihtsalt sega kokku ja oledki valmis. Proovi seda oma lemmiklisanditega.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Pehmed Ameerika pannkoogid</h2>
-                        <p>Selle lihtsa Ameerika pannkoogiretsepti järgi saad valmistada tõeliselt kergeid ja õhulisi pannkoogid, mis sobivad suurepäraselt erilise hommikusöögiks.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Juustu, tomati ja pesto võileib</h2>
-                        <p>See nutikas võileiva retsept võimaldab ära kasutada veidi kuivanud leiba, viimase juustutüki ja pesto purgi jäägi. Kiire, lihtne ja väga maitsev.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Lihtne halloumi vrapp</h2>
-                        <p>Kui ükskord õpid, kuidas valmistada kuldpruuni ja krõbedat halloumit, siis on võimalused lõputud, kuid selle kombineerimine hummusega ja salatiga lihtsas wrapis on suurepärane algus. Kui sulle meeldib vürtsikas toit, lisa pisut vürtsikat kastet.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Õhufritüüris valmistatud krõbe kanaburger</h2>
-                        <p>Täiusta oma BLT-burgerit C-tähega, mis tähistab vürtsikate maisihelvestega kaetud ja õhufritüüris küpsetatud kana, mis on asetatud brioche-burgeripätsi vahele.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Lihtsad vanilli keeksid</h2>
-                        <p>
-                            See keeksi retsept on kiire, lihtne ja üsna apsukindel. Ole loominguline kaunistustega või lisa paar tilka toiduvärvi, et neid veidi elavdada.
-                            </p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Juustu ja singi omlett</h2>
-                        <p>Proovi seda klassikalist omletti hommikusöögiks või serveeri seda koos rohkete roheliste salatitega kiireks ja kõhutäitvaks õhtusöögiks.</p>
-                    </article>
-                    <article class="search-result">
-                        <h2>Tervislik pasta carbonara</h2>
-                        <p>See tervislik pastaroog on maitsev ja rikkalik, kuid samas ka suhteliselt madala kalorsusega. Puristid ei pruugi olla rahul köögiviljade lisamisega, kuid see aitab sul täita oma viie portsjoni päevas soovitust.</p>
+                        <h2>Mina olen naidis</h2>
+                        <p>Mina olen naidis element!</p>
                     </article>
                 </div>
             </div>
