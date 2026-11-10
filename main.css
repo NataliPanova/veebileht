@@ -116,25 +116,39 @@ body {
 }
 
 .gallery {
-    display: flex; 
-    gap: 50px;     
-    align-items: center; 
+    display: flex;
+    gap: 50px;
+    justify-content: center;
     width: 80%;
     margin: 100px auto 0;
-
-
 }
 
 .gallery img {
-  max-width: 500px; 
-  height: auto;     
+    width: calc((100% - 40px) / 3);
+    height: auto;
 }
 
 .my-image {
       cursor: pointer;
-    
       border-radius: 8px;
     }
+
+
+ @media (max-width: 900px) {
+    .gallery {
+        flex-wrap: wrap;
+    }
+
+    .gallery img {
+        width: calc((100% - 20px) / 2);
+    }
+}
+
+@media (max-width: 600px) {
+    .gallery img {
+        width: 100%;
+    }
+}   
     
 dialog {
       border: none;
@@ -203,7 +217,7 @@ dialog {
     padding: 30px;
 }
 
-#recipeModal: :backdrop {
+#recipeModal::backdrop {
     background-color: rgba(51, 51, 51, 0.6);
 }
 
@@ -224,6 +238,6 @@ dialog {
     cursor: pointer;
 }
 
-.close.btn:hover {
+.close-btn:hover {
     color: #d5883a;
 }
