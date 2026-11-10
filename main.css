@@ -9,6 +9,10 @@ body {
     height: 300px;
     background: linear-gradient(to right, #ecad6f, #fce4ec);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 10px;
 }
 
 .banner h1 {
@@ -136,8 +140,7 @@ body {
     gap: 50px;
     justify-content: center;
     width: 80%;
-    margin: 100px auto 0;
-}
+    margin: 100px auto 50px;}
 
 .gallery img {
     width: calc((100% - 40px) / 3);
