@@ -13,6 +13,7 @@ body {
     flex-direction: column;
     justify-content: center;
     padding-bottom: 10px;
+    border-radius: 15px;
 }
 
 .banner h1 {
@@ -38,6 +39,7 @@ body {
     position: fixed;
     top: 0;
     right: 0;
+    border-radius: 5px;
     
 }
 
@@ -149,7 +151,7 @@ body {
 
 .my-image {
       cursor: pointer;
-      border-radius: 8px;
+      border-radius: 15px;
     }
 
 
@@ -184,6 +186,7 @@ dialog {
     width: fit-content;
     margin: 30px;
     margin-left: 20px;
+    border-radius: 15px;
 }
 
     .aluminenupp a {
@@ -199,6 +202,7 @@ dialog {
 .aluminenupp a:hover {
     background-color: #ddd;
     color: black;
+    border-radius: 15px;
 }
 
 .prevent-select {
