@@ -132,6 +132,15 @@ body {
     margin: 0;
     color: #475569;
 }
+.search-page {
+    padding: 20px;
+    margin: 0 auto;
+    min-height: 85vh;
+}
+
+.search-results {
+    min-height: 75vh;
+}
 @media (max-width: 600px) {
     .search-layout { grid-template-columns: 1fr; }
     .search-results { max-height: 360px; }
@@ -231,7 +240,7 @@ dialog {
 
 #recipeModal {
     width: 80%;
-    max-width: 650px;
+    max-width: 80vw;
     max-height: 80vh;
     overflow-y: auto;
     background-color: #fff5ef;
@@ -251,6 +260,25 @@ dialog {
 
 #recipeModal h3 {
     color: #333;
+}
+
+#modalImageContainer {
+    flex: 0 0 320px; 
+    max-width: 100%;
+}
+
+#modalImage {
+    display: block; 
+    width: 100%; 
+    height: auto; 
+    border-radius: 12px;
+}
+
+#modalContent {
+    display: flex; 
+    gap: 24px; 
+    align-items: flex-start; 
+    flex-wrap: wrap;
 }
 
 .close-btn {

@@ -13,35 +13,84 @@ function showPage(pageId) {
     });
     document.querySelector(`.topnav a#${pageId}-nav`).classList.add('active');
 }
-document.addEventListener("DOMContentLoaded", function() {
-    const modal = document.getElementById("recipeModal");
 
-    //Kui pole lehel pop upi siis lõpp
-    if (!modal) return;
-
-    const modalTitle = document.getElementById("modalTitle");
-    const modalDesc = document.getElementById("modalDesc");
-
-    // Leiab kõik otsingutulemused
-    const tulemused = document.querySelectorAll(".search-result");
-
-    tulemused.forEach(function(tulemus) {
-        tulemus.addEventListener("click", function() {
+function addListeners(tulemus) {
+     tulemus.addEventListener("click", function () {
+            const modal = document.getElementById("recipeModal");
 
             // Võtab vajutatud retsepti nime ja kirjelduse
             const nimi = tulemus.querySelector("h2").textContent;
             const kirjeldus = tulemus.querySelector("p").textContent;
+            const image = tulemus.dataset.image;
+            const filters = tulemus.dataset.filters;
+            const difficulty = tulemus.dataset.difficulty;
+            const steps = tulemus.dataset.steps;
+            const ingredients = tulemus.dataset.ingredients;
+            const price = tulemus.dataset.price;
+            const time = tulemus.dataset.time;
+
+            const modalTitle = document.getElementById("modalTitle");
+            const modalDesc = document.getElementById("modalDesc");
+            const modalImage = document.getElementById("modalImage");
+            const modalFilters = document.getElementById("modalFilters");
+            const modalDifficulty = document.getElementById("modalDifficulty");
+            const modalSteps = document.getElementById("modalSteps");
+            const modalIngredients = document.getElementById("modalIngredients");
+            const modalPrice = document.getElementById("modalPrice");
+            const modalTime = document.getElementById("modalTime");
 
             //Lisab need pop-up aknasse
-            modalTitle.textContent = nimi;
-            modalDesc.textContent = kirjeldus;
+            if (modalTitle) {
+                modalTitle.textContent = nimi;
+            }
+            if (modalDesc) {
+                modalDesc.textContent = kirjeldus;
+            }
+            if (modalImage) {
+                modalImage.src = image;
+            }
+            if (modalFilters) {
+                modalFilters.textContent = filters;
+            }
+            if (modalDifficulty) {
+                modalDifficulty.textContent = difficulty;
+            }
+            if (modalSteps) {
+                modalSteps.textContent = steps;
+            }
+            if (modalIngredients) {
+                modalIngredients.textContent = ingredients;
+            }
+            if (modalPrice) {
+                modalPrice.textContent = price;
+            }
+            if (modalTime) {
+                modalTime.textContent = time;
+            }
 
             //Avab pop-up akna
             modal.showModal();
 
         })
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    //Kui pole lehel pop upi siis lõpp
+    const modal = document.getElementById("recipeModal");
+    if (!modal) return;
+    
+    
+
+    // Leiab kõik otsingutulemused
+    const tulemused = document.querySelectorAll(".search-result");
+
+    tulemused.forEach(function (tulemus) {
+       addListeners(tulemus)
     })
 })
+    
+
 
 function filterResults() {
     const input = document.getElementById("search-input");
@@ -54,7 +103,7 @@ function filterResults() {
         const description = result.querySelector("p").textContent.toLowerCase();
         const nameDistance = levenshteinDistance(filter, name);
         // Set a threshold for the Levenshtein distance
-        const threshold = 2; 
+        const threshold = 2;
         let matchFound = false;
         name.split(" ").forEach(word => {
             const wordDistance = levenshteinDistance(filter, word);
@@ -95,3 +144,80 @@ function levenshteinDistance(s1, s2) {
     }
     return matrix[s2.length][s1.length];
 }
+
+
+// Parse recipes from Google Sheets CSV
+function parseCSV() {
+    const resultsContainer = document.getElementById("search-results");
+
+    if (!resultsContainer) {
+        console.error("Could not find #search-results");
+        return;
+    }
+
+    fetch("https://docs.google.com/spreadsheets/d/1mGjZjhe90vcSgpoC84J7pNtXFJRvRjdU9arfNAF4q4A/export?format=csv")
+        .then(response => response.text())
+        .then(csv => {
+            // Properly parse CSV, including commas and line breaks
+            const parsed = Papa.parse(csv, {
+                header: true,
+                skipEmptyLines: true,
+                transformHeader: header => header.trim().replace(/^\uFEFF/, "")
+            });
+
+            if (parsed.errors.length) {
+                console.warn("CSV parsing warnings:", parsed.errors);
+            }
+
+            // Clear previous results
+            resultsContainer.replaceChildren();
+
+            // Generate HTML for every recipe
+            parsed.data.forEach(recipe => {
+                // create a new article element for each recipe and append it to the results container
+                // Skip rows without a recipe name
+                const nimi = recipe["Nimi"]?.trim();
+
+                if (!nimi) return;
+
+                const kirjeldus = recipe["Kirjeldus"]?.trim() || "";
+                const image = recipe["Pilt (link)"]?.trim() || "";
+                const filters = recipe["Filtrid"]?.trim() || "";
+                const difficulty = recipe["Raskustase"]?.trim() || "";
+                const steps = recipe["Valmistus step by step"]?.trim() || "";
+                const ingredients = recipe["Koostisosad"]?.trim() || "";
+                const price = recipe["Hind"]?.trim() || "";
+                const time = recipe["Ajakulu"]?.trim() || "";
+
+                const resultElement = document.createElement("article");
+                resultElement.classList.add("search-result");
+
+                const titleElement = document.createElement("h2");
+                titleElement.textContent = nimi;
+
+                const descElement = document.createElement("p");
+                descElement.textContent = kirjeldus;
+
+                // Add the additional data as data attributes for later use in the modal
+                resultElement.dataset.image = image;
+                resultElement.dataset.filters = filters;
+                resultElement.dataset.difficulty = difficulty;
+                resultElement.dataset.steps = steps;
+                resultElement.dataset.ingredients = ingredients;
+                resultElement.dataset.price = price;
+                resultElement.dataset.time = time;
+
+                resultElement.append(
+                    titleElement,
+                    descElement
+                );
+
+                resultsContainer.appendChild(resultElement);
+                addListeners(resultElement);
+            });
+        })
+}
+
+// Load recipes when the page loads
+parseCSV();
+
