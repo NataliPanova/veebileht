@@ -9,6 +9,27 @@ body {
     height: 300px;
     background: linear-gradient(to right, #ecad6f, #fce4ec);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 10px;
+    border-radius: 15px;
+}
+
+.banner h1 {
+    color: #333;
+    font-size: 1em;
+    padding-top: 30px;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.banner h2 {
+    color: #333;
+    font-size: 1.5em;
+    padding-top: 10px;
+    text-align: left;
+    padding-left: 20px;
 }
 
 
@@ -18,6 +39,7 @@ body {
     position: fixed;
     top: 0;
     right: 0;
+    border-radius: 5px;
     
 }
 
@@ -125,25 +147,38 @@ body {
 }
 
 .gallery {
-    display: flex; 
-    gap: 50px;     
-    align-items: center; 
+    display: flex;
+    gap: 50px;
+    justify-content: center;
     width: 80%;
-    margin: 100px auto 0;
-
-
-}
+    margin: 100px auto 50px;}
 
 .gallery img {
-  max-width: 500px; 
-  height: auto;     
+    width: calc((100% - 40px) / 3);
+    height: auto;
 }
 
 .my-image {
       cursor: pointer;
-    
-      border-radius: 8px;
+      border-radius: 15px;
     }
+
+
+ @media (max-width: 900px) {
+    .gallery {
+        flex-wrap: wrap;
+    }
+
+    .gallery img {
+        width: calc((100% - 20px) / 2);
+    }
+}
+
+@media (max-width: 600px) {
+    .gallery img {
+        width: 100%;
+    }
+}   
     
 dialog {
       border: none;
@@ -155,10 +190,12 @@ dialog {
 .aluminenupp {
     background-color: #333;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     width: fit-content;
-    margin: 50px auto 0 auto;
+    margin: 30px;
+    margin-left: 20px;
+    border-radius: 15px;
 }
 
     .aluminenupp a {
@@ -174,6 +211,7 @@ dialog {
 .aluminenupp a:hover {
     background-color: #ddd;
     color: black;
+    border-radius: 15px;
 }
 
 .prevent-select {
@@ -212,7 +250,7 @@ dialog {
     padding: 30px;
 }
 
-#recipeModal: :backdrop {
+#recipeModal::backdrop {
     background-color: rgba(51, 51, 51, 0.6);
 }
 
@@ -233,6 +271,6 @@ dialog {
     cursor: pointer;
 }
 
-.close.btn:hover {
+.close-btn:hover {
     color: #d5883a;
 }
