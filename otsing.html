@@ -63,19 +63,36 @@
 
 <dialog id="recipeModal">
     <form method="dialog">
-        <button class="close-btn" aria-label="Sulge">×</button>
+        <button class="close-btn" aria-label="Sulge">x</button>
     </form>
 
-    <h2 id="modalTitle"></h2>
+    <div id="modalContent">
+        <div id="modalImageContainer">
+            <img id="modalImage" src="" alt="Retsepti pilt">
+        </div>
 
-    <h3>Kirjeldus</h3>
-    <p id="modalDesc"></p>
+        <div style="flex: 1 1 300px; min-width: 0;">
+            <h2 id="modalTitle"></h2>
 
-    <h3>Koostisosad</h3>
-    <ul id="modalIngredients"></ul>
+            <h3>Kirjeldus</h3>
+            <p id="modalDesc"></p>
 
-    <h3>Valmistamine</h3>
-    <ol id="modalSteps"></ol>
+            <h3>Koostisosad</h3>
+            <ul id="modalIngredients"></ul>
+
+            <h3>Valmistamine</h3>
+            <ol id="modalSteps"></ol>
+
+            <h3>Raskustase</h3>
+            <p id="modalDifficulty"></p>
+
+            <h3>Hind</h3>
+            <p id="modalPrice"></p>
+
+            <h3>Ajakulu</h3>
+            <p id="modalTime"></p>
+        </div>
+    </div>
 </dialog>
 
 <script src="script.js"></script>
