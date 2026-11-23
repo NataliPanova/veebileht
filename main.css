@@ -2,7 +2,19 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f6d9d0 ;
     color: #333;
+    margin-top: 100px;
 }
+
+
+.nimi p {
+    color: #ffffff;
+    text-align: left;
+    margin: 0;
+    padding: 10px 20px;
+    font-size: 20px;
+
+}
+
 
 .banner {
     width: 100%;
@@ -14,6 +26,7 @@ body {
     justify-content: center;
     padding-bottom: 10px;
     border-radius: 15px;
+    
 }
 
 .banner h1 {
@@ -22,6 +35,7 @@ body {
     padding-top: 30px;
     text-align: left;
     padding-left: 20px;
+   
 }
 
 .banner h2 {
@@ -36,11 +50,20 @@ body {
 .topnav {
     background-color: #333;
     overflow: hidden;
+    opacity: 0.8;
     position: fixed;
     top: 0;
     right: 0;
-    border-radius: 5px;
+    left: 0;
     
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.menu {
+    display: flex;
 }
 
 .hidden {
@@ -49,10 +72,10 @@ body {
 
 
 .topnav a {
-    float: left;
+
     color: #f2f2f2;
     text-align: center;
-    padding: 14px 16px;
+    padding: 14px 14px;
     text-decoration: none;
     font-size: 17px;
 }
@@ -151,7 +174,7 @@ body {
     gap: 50px;
     justify-content: center;
     width: 80%;
-    margin: 100px auto 50px;}
+    margin: 80px auto 50px;}
 
 .gallery img {
     width: calc((100% - 40px) / 3);
@@ -292,4 +315,91 @@ dialog {
 
 .close-btn:hover {
     color: #d5883a;
+}
+
+.retseptid h1{
+    margin-left: 20px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+.retseptid p{
+    margin-left: 20px;
+    font-size: 18px;
+    margin-top: 0;
+}
+
+.retseptid-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 20px 20px 20px;
+}
+
+.retseptid-text h1 {
+    margin: 0;
+}
+
+.retseptid-text p {
+    margin: 5px 0 0 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.vaata-koike {
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.vaata-koike:hover {
+    color: #b86c1a;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 20px;
+}
+
+.eelised {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.eelise-kaart {
+    width: 320px;
+    background: white;
+    padding: 40px 25px;
+    border-radius: 20px;
+    border: 1px solid #f0dca9;
+    text-align: center;
+}
+
+.ikoon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    background: #f8ebc8;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 28px;
+}
+
+.contact-info h2{
+
+    text-align: center;
+}
+
+.contact-info p{
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
 }
