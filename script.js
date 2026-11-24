@@ -14,6 +14,51 @@ function showPage(pageId) {
     document.querySelector(`.topnav a#${pageId}-nav`).classList.add('active');
 }
 
+function populateFilters(recipes) {
+    const container = document.querySelector("#search-filters");
+    if (!container) return;
+
+    const filterValues = new Set();
+
+    if (Array.isArray(recipes)) {
+        recipes.forEach(recipe => {
+            (recipe["Filtrid"] || "").split(/[,;|]/).forEach(filter => {
+                const value = filter.trim();
+                if (value) filterValues.add(value);
+            });
+        });
+    } else {
+        document.querySelectorAll(".search-result").forEach(result => {
+            (result.dataset.filters || "").split(/[,;|]/).forEach(filter => {
+                const value = filter.trim();
+                if (value) filterValues.add(value);
+            });
+        });
+    }
+
+    container.replaceChildren();
+
+    filterValues.forEach(value => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "filter-option";
+        button.textContent = value;
+        button.dataset.filter = value;
+        button.setAttribute("aria-pressed", "false");
+        addFilterListener(button);
+
+        container.appendChild(button);
+    });
+}
+
+function addFilterListener(button) {
+    button.addEventListener("click", () => {
+        button.classList.toggle("active");
+        button.setAttribute("aria-pressed", String(button.classList.contains("active")));
+        filterResults();
+    });
+}
+
 // Muudab raskustaseme (nt 4 või "Keskmine") viie tähe süsteemiks
 function teeTarnid(raskustase) {
     if (!raskustase) {
@@ -147,6 +192,20 @@ function addListeners(tulemus) {
 
 // Käivitub kohe, kui leht on laetud
 document.addEventListener("DOMContentLoaded", function () {
+    const clearButton = document.getElementById("clear-search");
+    const searchInput = document.getElementById("search-input");
+    if (clearButton && searchInput) {
+        clearButton.addEventListener("click", () => {
+            searchInput.value = "";
+            document.querySelectorAll(".filter-option.active").forEach(option => {
+                option.classList.remove("active");
+                option.setAttribute("aria-pressed", "false");
+            });
+            filterResults();
+            searchInput.focus();
+        });
+    }
+
     const modal = document.getElementById("recipeModal");
     if (!modal) return;
 
@@ -184,30 +243,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function filterResults() {
     const input = document.getElementById("search-input");
-    const filter = input.value.toLowerCase();
+    const filter = input.value.trim().toLowerCase();
+    const selectedFilters = Array.from(document.querySelectorAll(".filter-option.active"))
+        .map(option => option.dataset.filter);
     const results = document.querySelectorAll(".search-result");
-    // leave only the results where the name contains a similar word, or where name/description contains the search word
+    let visibleCount = 0;
+
     results.forEach(result => {
-        //check the name and description separately
         const name = result.querySelector("h2").textContent.toLowerCase();
         const description = result.querySelector("p").textContent.toLowerCase();
-        const nameDistance = levenshteinDistance(filter, name);
-        // Set a threshold for the Levenshtein distance
-        const threshold = 2;
-        let matchFound = false;
-        name.split(" ").forEach(word => {
-            const wordDistance = levenshteinDistance(filter, word);
-            if (wordDistance <= threshold || word.includes(filter)) {
-                matchFound = true;
-            }
-        });
+        const matchesSearch = !filter ||
+            name.includes(filter) ||
+            description.includes(filter) ||
+            name.split(/\s+/).some(word =>
+                word.includes(filter) || levenshteinDistance(filter, word) <= 2
+            );
+        const resultFilters = (result.dataset.filters || "")
+            .split(/[,;|]/)
+            .map(value => value.trim());
+        const matchesFilters = selectedFilters.every(value => resultFilters.includes(value));
+        const isVisible = matchesSearch && matchesFilters;
 
-        if (matchFound || name.includes(filter) || description.includes(filter)) {
-            result.classList.remove("hidden");
-        } else {
-            result.classList.add("hidden");
-        }
+        result.classList.toggle("hidden", !isVisible);
+        if (isVisible) visibleCount++;
     });
+
+    const status = document.getElementById("search-results-status");
+    if (status) {
+        status.textContent = visibleCount === 0
+            ? "Ühtegi retsepti ei leitud. Muuda otsingut või filtreid."
+            : `Leitud ${visibleCount} ${visibleCount === 1 ? "retsept" : "retsepti"}`;
+    }
+
+    const clearButton = document.getElementById("clear-search");
+    if (clearButton) {
+        clearButton.disabled = !filter && selectedFilters.length === 0;
+    }
 }
 
 // Levenshtein distance function
@@ -246,7 +317,12 @@ function parseCSV() {
     }
 
     fetch("https://docs.google.com/spreadsheets/d/1mGjZjhe90vcSgpoC84J7pNtXFJRvRjdU9arfNAF4q4A/export?format=csv")
-        .then(response => response.text())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Recipe request failed with status ${response.status}`);
+            }
+            return response.text();
+        })
         .then(csv => {
             // Properly parse CSV, including commas and line breaks
             const parsed = Papa.parse(csv, {
@@ -305,7 +381,16 @@ function parseCSV() {
                 resultsContainer.appendChild(resultElement);
                 addListeners(resultElement);
             });
+            populateFilters(parsed.data);
+            filterResults();
         })
+        .catch(error => {
+            console.error("Could not load recipes:", error);
+            const status = document.getElementById("search-results-status");
+            if (status) {
+                status.textContent = "Retseptide laadimine ebaõnnestus. Proovi lehte värskendada.";
+            }
+        });
 }
 
 // Load recipes when the page loads
