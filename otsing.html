@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="et">
 
 
 <head>
@@ -12,7 +12,7 @@
         <script src="https://kit.fontawesome.com/2cb1c8ae17.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="search-page-body">
 
 <div class="topnav">
 
@@ -29,10 +29,16 @@
 </div>
 
 <div class="search-page">
-    <h1>Otsing</h1>
+    <header class="search-heading">
+        <div>
+            <p class="search-eyebrow">Leia midagi maitsvat</p>
+            <h1>Otsing</h1>
+        </div>
+        <p class="search-intro">Sirvi retsepte ja kasuta filtreid, et leida just endale sobiv.</p>
+    </header>
 
     <div class="search-layout">
-        <aside class="search-sidebar">
+        <aside class="search-sidebar" aria-label="Otsing ja filtrid">
 
             <label for="search-input">Otsi</label>
 
@@ -43,14 +49,24 @@
                 oninput="filterResults()"
             >
 
-            
-            <div id="search-filters" class="search-filters">
+            <div class="filter-heading">
+                <h2>Filtrid</h2>
+                <button id="clear-search" class="clear-search" type="button" disabled>
+                    Tühjenda
+                </button>
+            </div>
+
+            <div id="search-filters" class="search-filters" role="group" aria-label="Retseptide filtrid">
             </div>
 
         </aside>
 
-        <div class="search-results" id="search-results" aria-label="Otsingutulemused">
-        </div>
+        <section class="search-results-panel" aria-label="Otsingutulemused">
+            <div class="search-results-toolbar">
+                <p id="search-results-status" aria-live="polite">Retsepte laaditakse...</p>
+            </div>
+            <div class="search-results" id="search-results"></div>
+        </section>
     </div>
 </div>
 
