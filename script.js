@@ -72,65 +72,155 @@ function applyFilter(container) {
     });
 }
 
-function addListeners(tulemus) {
-     tulemus.addEventListener("click", function () {
-            const modal = document.getElementById("recipeModal");
+// Muudab raskustaseme (nt 4 või "Keskmine") viie tähe süsteemiks
+function teeTarnid(raskustase) {
+    if (!raskustase) {
+        return "-";
+    }
 
-            // Võtab vajutatud retsepti nime ja kirjelduse
-            const nimi = tulemus.querySelector("h2").textContent;
-            const kirjeldus = tulemus.querySelector("p").textContent;
-            const image = tulemus.dataset.image;
-            const filters = tulemus.dataset.filters;
-            const difficulty = tulemus.dataset.difficulty;
-            const steps = tulemus.dataset.steps;
-            const ingredients = tulemus.dataset.ingredients;
-            const price = tulemus.dataset.price;
-            const time = tulemus.dataset.time;
+    // Proovib tekstist kätte saada numbri (nt "4" või "4/5" -> 4)
+    let number = parseInt(raskustase);
 
-            const modalTitle = document.getElementById("modalTitle");
-            const modalDesc = document.getElementById("modalDesc");
-            const modalImage = document.getElementById("modalImage");
-            const modalFilters = document.getElementById("modalFilters");
-            const modalDifficulty = document.getElementById("modalDifficulty");
-            const modalSteps = document.getElementById("modalSteps");
-            const modalIngredients = document.getElementById("modalIngredients");
-            const modalPrice = document.getElementById("modalPrice");
-            const modalTime = document.getElementById("modalTime");
+    // Kui tabelis on numbri asemel sõna (nt "Lihtne", "Keskmine", "Raske"), teisendab selle numbriks
+    if (isNaN(number)) {
+        const tekst = raskustase.toLowerCase();
+        if (tekst.includes("lihtne") || tekst.includes("kerge")) {
+            number = 2;
+        } else if (tekst.includes("keskmine")) {
+            number = 3;
+        } else if (tekst.includes("raske")) {
+            number = 5;
+        } else {
+            return raskustase;
+        }
+    }
 
-            //Lisab need pop-up aknasse
-            if (modalTitle) {
-                modalTitle.textContent = nimi;
-            }
-            if (modalDesc) {
-                modalDesc.textContent = kirjeldus;
-            }
-            if (modalImage) {
-                modalImage.src = image;
-            }
-            if (modalFilters) {
-                modalFilters.textContent = filters;
-            }
-            if (modalDifficulty) {
-                modalDifficulty.textContent = difficulty;
-            }
-            if (modalSteps) {
-                modalSteps.textContent = steps;
-            }
-            if (modalIngredients) {
-                modalIngredients.textContent = ingredients;
-            }
-            if (modalPrice) {
-                modalPrice.textContent = price;
-            }
-            if (modalTime) {
-                modalTime.textContent = time;
-            }
-
-            //Avab pop-up akna
-            modal.showModal();
-
-        })
+    // Käib tsükliga läbi 1 kuni 5 ja lisab täidetud või tühja tähe ikooni
+    let tarnid = "";
+    for (let i = 1; i <= 5; i++) {
+        if (i <= number) {
+            tarnid += '<i class="fa-solid fa-star star-filled"></i>';
+        } else {
+            tarnid += '<i class="fa-regular fa-star star-empty"></i>';
+        }
+    }
+    return tarnid;
 }
+
+// Lisab retseptidele klikkimise asja, mis täidab ja avab pop-up akna
+function addListeners(tulemus) {
+    tulemus.addEventListener("click", function () {
+        const modal = document.getElementById("recipeModal");
+
+        // Loeb vajutatud retsepti küljest kõik andmed
+        const nimi = tulemus.querySelector("h2").textContent;
+        const kirjeldus = tulemus.querySelector("p").textContent;
+        const image = tulemus.dataset.image;
+        const filters = tulemus.dataset.filters;
+        const difficulty = tulemus.dataset.difficulty;
+        const steps = tulemus.dataset.steps;
+        const ingredients = tulemus.dataset.ingredients;
+        const price = tulemus.dataset.price;
+        const time = tulemus.dataset.time;
+
+        // kirjutab põhiandmed pop-up akna elementidesse
+        document.getElementById("modalTitle").textContent = nimi;
+        document.getElementById("modalDesc").textContent = kirjeldus;
+        document.getElementById("modalImage").src = image;
+        document.getElementById("modalPrice").textContent = price || "-";
+        document.getElementById("modalTime").textContent = time || "-";
+        document.getElementById("modalDifficulty").innerHTML = teeTarnid(difficulty);
+
+        // 1. Siltide loomine pildi peale (tükeldab koma kohalt, nt "Soolane,Soe")
+        const modalFilters = document.getElementById("modalFilters");
+        modalFilters.innerHTML = "";
+        if (filters) {
+            const siltideNimekiri = filters.split(",");
+            siltideNimekiri.forEach(silt => {
+                if (silt.trim() !== "") {
+                    const span = document.createElement("span");
+                    span.className = "modal-tag";
+                    const ilusSilt = silt.trim();
+                    span.textContent = ilusSilt[0].toUpperCase() + ilusSilt.slice(1);
+                    modalFilters.appendChild(span);
+                }
+            });
+        }
+
+        // 2. Koostisosade loomine filtritena 
+        
+        const modalIngredients = document.getElementById("modalIngredients");
+        modalIngredients.innerHTML = "";
+        if (ingredients) {
+            const koostisosadeList = ingredients.split("\n");
+            koostisosadeList.forEach(asi => {
+                if (asi.trim() !== "") {
+                    const li = document.createElement("li");
+                    li.textContent = asi.trim();
+                    modalIngredients.appendChild(li);
+                }
+            });
+        }
+
+        // 3. Samm-sammult juhendi loomine
+        const modalSteps = document.getElementById("modalSteps");
+        modalSteps.innerHTML = "";
+        if (steps) {
+            const sammudeList = steps.split("\n");
+            sammudeList.forEach((samm, index) => {
+                let puhasTekst = samm.trim();
+
+                if (puhasTekst !== "") {
+                    // Kui sammu alguses on juba number (nt "1." või "1 "), lõikame selle eest ära
+                    while (
+                        puhasTekst.length > 0 &&
+                        ((puhasTekst[0] >= "0" && puhasTekst[0] <= "9") ||
+                            puhasTekst[0] === "." ||
+                            puhasTekst[0] === ")")
+                    ) {
+                        puhasTekst = puhasTekst.slice(1).trim();
+                    }
+
+                    const li = document.createElement("li");
+
+                    // Loob ümmarguse järjekorranumbri (1, 2, 3...)
+                    const numberSpan = document.createElement("span");
+                    numberSpan.className = "step-number";
+                    numberSpan.textContent = index + 1;
+
+                    // Loob sammu teksti ilma alguse numbrita
+                    const tekstSpan = document.createElement("span");
+                    tekstSpan.textContent = puhasTekst;
+
+                    li.append(numberSpan, tekstSpan);
+                    modalSteps.appendChild(li);
+                }
+            });
+        }
+
+        // Avab pop-up akna ekraanile
+        modal.showModal();
+    });
+}
+
+// Käivitub kohe, kui leht on laetud
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("recipeModal");
+    if (!modal) return;
+
+    // sulgeb pop-up akna, kui kasutaja vajutab aknast väljapoole tumedale taustale
+    modal.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.close();
+        }
+    });
+
+    // Seob klikkimise kuulajad olemasolevate retseptidega
+    const tulemused = document.querySelectorAll(".search-result");
+    tulemused.forEach(function (tulemus) {
+        addListeners(tulemus);
+    });
+});
 
 document.addEventListener("DOMContentLoaded", function () {
 
