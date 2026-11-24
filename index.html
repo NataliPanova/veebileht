@@ -7,6 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Krõbedad tudengid</title>
         <link rel="stylesheet" href="main.css">
+        <script src="script.js" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
         <script src="https://kit.fontawesome.com/2cb1c8ae17.js" crossorigin="anonymous"></script>
 </head>
 
@@ -61,66 +63,205 @@ Avasta lihtsaid ja odavaid retsepte, mille valisime just sinu jaoks!</h2>
     
 </div>
 
-<div class="gallery">
-        <img src="assets/images/chicken.jpg" alt="Pilt 1" class="my-image" 
-             data-title="Krõbe magushapu kana" 
-             data-desc="Krõbekana retsept, mis sarnaneb rooga, mida pakutakse Hiina restoraanides." 
-             data-steps="1. Lõika kanafilee väikesteks tükkideks. <br>2. Sega omavahel muna, jahu, tärklis, sool ja pipar. <br>3. Lisa kana ning sega korralikult läbi.
-            <br>4. Prae kana kuumal pannil kuldpruuniks (umbes 5-7 minutit). Tõsta kõrvale.
-            <br>5. Sega külmal pannil kokku õli, ketšup, sojakaste, suhkur, äädikas ja vesi.
-            <br>6. Pane keskminst tuld ja segudes kastet oota kuni see hakkab keema.
-            <br>7. Lisa kana hauta veel 2-3 minutit, kuni kana on kastmega ühtlaselt kaetud.
-            <br>8. Serveeri koos riisiga/nuudlitega."> 
-             
-        <img src="assets/images/smuuti.jpg" alt="Pilt 2" class="my-image" 
-             data-title="All Berry Bang smuuti" 
-             data-desc="Lihtne retsept Boosti All Berry Bang smuuti tegemiseks kodus." 
-             data-steps="1. Pane blenderisse 250-300ml õunamahla. <br>2. Lisa soovitud kogus marju.
-            <br>3. Lisa 3 kulbitäit maasika jääjogurtit ja 2 kulbitäit jääd.
-            <br>4. Blenderda kokku! ">
-             
-        <img src="assets/images/pizza5.jpg" alt="Pilt 3" class="my-image" 
-             data-title="Choritzo-pannipitsad" 
-             data-desc="Nende lihtsate pannipitsade valmistamine võtab algusest lõpuni vaid mõne minuti. Ei pea ootama, kuni tainas kerkib, ega ahju eelsoojendama. Täiuslik kiirtoit." 
-             data-steps="1. Pane jahu suurde kaussi. <br>2. Lisa sool, soe vesi ja 2 supilusikatäit õli ning sega kokku, kuni tekib pehme tainas. <br>3. Sõtku lühidalt läbi, seejärel jaga tainas neljaks võrdseks palliks.
-             <br>4. Puista puhtale tööpinnale veidi jahu ja rullige üks pall rulliga umbes 20 cm läbimõõduga ringiks. <br>5. Määri tainast mõlemalt poolt kergelt ülejäänud õliga.<br>6. 
-            Aseta suur teflonpann kuumakindla käepidemega keskmisele-kõrgele kuumusele. <br>7. Aseta tainas ettevaatlikult pannile ja küpseta 5 minutit, kuni see on kuldpruun. <br>8. Pööra ümber ja küpseta veel 3 minutit, kuni tainas on läbi küpsenud.
-             <br>9. Eelkuumuta grill keskmisele kuumusele. <br>10. Laota tomatid lusikaga tainale, jättes serva ümber vaba ääre, ning puista peale maitsetaimed. <br>11. Puista peale juust, rebi kolm chorizo viilu pooleks ja paiguta need peale. Lõpeta rohkelt musta pipraga.
-             <br>12. Grilli 3-4 minutit, kuni juust on sulanud. Korda sama, et valmistada ülejäänud pitsad. ">
-    </div>
+<div class="retseptide-grid">
+
+    <article class="retseptikaart search-result"
+        data-image="assets/images/chicken.jpg"
+        data-filters="Magus,Soolane,Soe,Lõunasöök,Õhtusöök,Panniroog,Lihatoit"
+        data-difficulty="3"
+        data-price="5-7 eur"
+        data-time="30 min"
+        data-ingredients="Kana joks:
+        500 g kanafileed
+1-2 muna
+3 sl nisujahu
+3 sl kartulitärklist
+soola ja pipart maitse järgi
+taimeõli praadimiseks
+Kastme jaoks:
+4 sl ketšupit
+2 sl sojakastet
+2 sl suhkrut
+2 sl riisiäädikat või õunaäädikat
+100 ml vett
+1 sl tärklist"
+        data-steps="1. Lõika kanafilee väikesteks tükkideks.
+2. Sega omavahel muna, jahu, tärklis, sool ja pipar. Lisa kana ning sega korralikult läbi.
+3. Prae kana kuumal pannil kuldpruuniks (umbes 5-7 minutit). Tõsta kõrvale.
+4. Sega külmal pannil kokku õli, ketšup, sojakaste, suhkur, äädikas ja vesi
+5. Pane keskminst tuld ja segudes kastet oota kuni see hakkab keema
+6. Lisa kana hauta veel 2-3 minutit, kuni kana on kastmega ühtlaselt kaetud.
+7. Serveeri koos riisi või nuudlitega.">
+
+        <img src="assets/images/kana.jpeg" alt="Krõbe magushapu kana">
+
+        <div class="retseptikaart-sisu">
+            <div class="retsepti-tagid">
+                <span>Magus</span>
+                <span>Soolane</span>
+                <span>Soe</span>
+                <span>Lõunasöök</span>
+                <span>Õhtusöök</span>
+                <span>Panniroog</span>
+                <span>Lihatoit</span>
+            </div>
+
+            <h2>Krõbe magushapu kana</h2>
+
+            <p>
+                Krõbekana retsept, mis sarnaneb rooga,
+                mida pakutakse Hiina restoranides.
+            </p>
+        </div>
+
+    </article>
+
+    <article class="retseptikaart search-result"
+        data-image="assets/images/smuuti.jpg"
+        data-filters="Magus,Külm"
+        data-difficulty="1"
+        data-price="6€"
+        data-time="5 min"
+        data-ingredients="Õunamahl
+Külmutatud marjad (mustikad, maasikad ja vaarikad)
+Maasika jääjogurt
+Jää"
+        data-steps="1. Pane blenderisse 250-300ml õunamahla.
+2. Lisa soovitud kogus marju.
+3. Lisa 3 kulbitäit maasika jääjogurtit ja 2 kulbitäit jääd.
+4. Blenderda kokku!">
+
+        <img src="assets/images/smuuti.jpg" alt="All Berry Bang smuuti">
+
+        <div class="retseptikaart-sisu">
+            <div class="retsepti-tagid">
+                <span>Magus</span>
+                <span>Külm</span>
+            </div>
+
+            <h2>All Berry Bang smuuti</h2>
+
+            <p>
+                Lihtne retsept Boosti All Berry Bang
+                smuuti tegemiseks kodus.
+            </p>
+        </div>
+
+    </article>
+
+    <article class="retseptikaart search-result"
+        data-image="assets/images/pizza5.jpg"
+        data-filters="Soe,Soolane,Lõunasöök,Õhtusöök,Panniroog,Lihatoit"
+        data-difficulty="2"
+        data-price="8€"
+        data-time="30 min"
+        data-ingredients="500 g isekerkivat jahu
+1 tl soola
+200 ml sooja vett
+3 spl oliiviõli
+200 g purki hakitud tomateid
+½ tl kuivatatud maitsetaimede segu
+50 g küpset cheddarit, riivitud
+12 õhukest chorizo viilu
+jahvatatud musta pipart"
+        data-steps="1. Pane jahu suurde kaussi. Lisa sool, soe vesi ja 2 supilusikatäit õli ning sega kokku, kuni tekib pehme tainas. 
+2. Sõtku lühidalt läbi, seejärel jaga tainas neljaks võrdseks palliks.
+3. Puista puhtale tööpinnale veidi jahu ja rullige üks pall rulliga umbes 20 cm läbimõõduga ringiks.
+4. Määri tainast mõlemalt poolt kergelt ülejäänud õliga.
+5. Aseta suur teflonpann kuumakindla käepidemega keskmisele-kõrgele kuumusele.
+6. Aseta tainas ettevaatlikult pannile ja küpseta 5 minutit, kuni see on kuldpruun. Pööra ümber ja küpseta veel 3 minutit, kuni tainas on läbi küpsenud.
+7. Eelkuumuta grill keskmisele kuumusele.
+8 .Laota tomatid lusikaga tainale, jättes serva ümber vaba ääre, ning puista peale maitsetaimed.
+9. Puista peale juust, rebi kolm chorizo viilu pooleks ja paiguta need peale. Lõpeta rohkelt musta pipraga.
+10. Grilli 3-4 minutit, kuni juust on sulanud. 
+11. Korda sama, et valmistada ülejäänud pitsad.
+
+
+">
+
+        <img src="assets/images/pizza5.jpg" alt="Chorizo-pannipitsad">
+
+        <div class="retseptikaart-sisu">
+            <div class="retsepti-tagid">
+                <span>Soe</span>
+                <span>Soolane</span>
+                <span>Õhtusöök</span>
+                <span>Lõunasöök</span>
+                <span>Panniroog</span>
+                <span>Lihatoit</span>
+
+            </div>
+
+            <h2>Chorizo-pannipitsad</h2>
+
+            <p>
+                Nende lihtsate pannipitsade valmistamine võtab algusest lõpuni vaid mõne minuti. Ei pea ootama, kuni tainas kerkib, ega ahju eelsoojendama. Täiuslik kiirtoit.
+            </p>
+        </div>
+
+    </article>
+
+</div>
+
+
 
 <dialog id="recipeModal">
-        <form method="dialog">
-            <button class="close-btn">x</button>
-        </form>
-        <h2 id="modalTitle">Retsept</h2>
-        <h3>Kirjeldus:</h3>
-        <p id="modalDesc">Kijeldus</p>
-        <h3>Step by step:</h3>
-        <p id="modalSteps">Step by step</p>
-    </dialog>
+    <!-- sulgemisnupp paremas ülanurgas -->
+    <form method="dialog">
+        <button class="close-btn" aria-label="Sulge">&times;</button>
+    </form>
+
+    <!-- ülemine osa: pilt vasakul ja retsepti info paremal -->
+    <div class="modal-top">
+        <img id="modalImage" src="" alt="Retsepti pilt" class="modal-img">
+
+        <div class="modal-header-info">
+            <!-- filtrite rida (nt soolane, soe) -->
+            <div id="modalFilters" class="modal-tags"></div>
+
+            <!-- retsepti pealkiri ja kirjeldus -->
+            <h2 id="modalTitle"></h2>
+            <p id="modalDesc" class="modal-desc-text"></p>
+
+            <!-- 3 väikest kasti: Hind / Raskustase / Aeg -->
+            <div class="modal-info-row">
+                <div class="info-pill">
+                    <i class="fa-solid fa-euro-sign"></i>
+                    <span>Hind: <strong id="modalPrice">-</strong></span>
+                </div>
+                <div class="info-pill">
+                    <i class="fa-solid fa-signal"></i>
+                    <span id="modalDifficulty">-</span>
+                </div>
+                <div class="info-pill">
+                    <i class="fa-regular fa-clock"></i>
+                    <span>Aeg: <strong id="modalTime">-</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="modal-divider">
+
+    <!-- alumine osa: koostisosad vasakul ja step by step paremal -->
+    <div class="modal-bottom">
+        <!-- Koostisosade kast -->
+        <div class="ingredients-card">
+            <h3>Koostisosad</h3>
+            <ul id="modalIngredients" class="ingredients-list"></ul>
+        </div>
+
+        <!-- step by step juhendi osa -->
+        <div class="steps-section">
+            <h3>Valmistamine</h3>
+            <ol id="modalSteps" class="steps-list"></ol>
+        </div>
+    </div>
+</dialog>
 
     </div>
 
-<script>
-    const modal = document.getElementById('recipeModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDesc');
-    const modalSteps = document.getElementById('modalSteps');
 
-
-    document.querySelectorAll('.my-image').forEach(img => {
-        img.addEventListener('click', () => {
-            
-            modalTitle.textContent = img.getAttribute('data-title');
-            modalDesc.textContent = img.getAttribute('data-desc');
-            
-            modalSteps.innerHTML = img.getAttribute('data-steps');
-            
-            modal.showModal();
-        });
-    });
-</script>
 
 
 
