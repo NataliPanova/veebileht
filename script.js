@@ -14,6 +14,64 @@ function showPage(pageId) {
     document.querySelector(`.topnav a#${pageId}-nav`).classList.add('active');
 }
 
+function populateFilters(recipes) {
+    const container = document.querySelector("#search-filters");
+    if (!container) return;
+
+    const filterValues = new Set();
+
+    if (Array.isArray(recipes)) {
+        recipes.forEach(recipe => {
+            (recipe["Filtrid"] || "").split(/[,;|]/).forEach(filter => {
+                const value = filter.trim();
+                if (value) filterValues.add(value);
+            });
+        });
+    } else {
+        document.querySelectorAll(".search-result").forEach(result => {
+            (result.dataset.filters || "").split(/[,;|]/).forEach(filter => {
+                const value = filter.trim();
+                if (value) filterValues.add(value);
+            });
+        });
+    }
+
+    container.replaceChildren();
+
+    filterValues.forEach(value => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "filter-option";
+        button.textContent = value;
+        button.dataset.filter = value;
+        addFilterListener(button, container);
+
+        container.appendChild(button);
+    });
+}
+
+function addFilterListener(button, container) {
+    button.addEventListener("click", () => {
+        button.classList.toggle("active");
+        applyFilter(container);
+    });
+}
+
+function applyFilter(container) {
+    const selectedFilters = Array.from(container.querySelectorAll(".filter-option.active"))
+        .map(option => option.dataset.filter);
+
+    document.querySelectorAll(".search-result").forEach(result => {
+        const resultFilters = (result.dataset.filters || "")
+            .split(/[,;|]/)
+            .map(filter => filter.trim());
+        const matches = selectedFilters.length === 0 ||
+            selectedFilters.every(filter => resultFilters.includes(filter));
+
+        result.classList.toggle("hidden", !matches);
+    });
+}
+
 function addListeners(tulemus) {
      tulemus.addEventListener("click", function () {
             const modal = document.getElementById("recipeModal");
@@ -215,6 +273,7 @@ function parseCSV() {
                 resultsContainer.appendChild(resultElement);
                 addListeners(resultElement);
             });
+            populateFilters(parsed.data);
         })
 }
 
