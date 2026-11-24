@@ -122,18 +122,6 @@ body {
     gap: 8px;
     margin-top: 14px;
 }
-.search-filters button {
-    padding: 7px 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 16px;
-    background: white;
-}
-
-.search-filters button:hover {
-    background-color: #d5883a;
-    color: white;
-    cursor: pointer;
-}
 
 .search-results {
     max-height: 420px;
@@ -164,6 +152,25 @@ body {
 .search-results {
     min-height: 75vh;
 }
+
+.filter-option {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 16px;
+    background: white;
+    cursor: pointer;
+}
+
+.filter-option.hover {
+    background-color: #3ad53f6b;
+    color: white;
+}
+
+.filter-option.active {
+    background-color: #d5883a;
+    color: white;
+}
+
 @media (max-width: 600px) {
     .search-layout { grid-template-columns: 1fr; }
     .search-results { max-height: 360px; }
