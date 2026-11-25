@@ -1,64 +1,116 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f6d9d0 ;
-    color: #333;
+    font-family: "Playfair Display", serif;
+    background-color: #fdfaf3 ;
+    color: #000000;
     margin-top: 100px;
 }
 
 
-.nimi p {
-    color: #ffffff;
-    text-align: left;
-    margin: 0;
-    padding: 10px 20px;
-    font-size: 20px;
+.container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
+.nimi {
+    margin-left: 40px;
+}
+
+.logo-black {
+    color: #000;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.logo-orange {
+    color: #e18931;
+    font-size: 32px;
+    font-weight: bold;
 }
 
 
 .banner {
-    width: 100%;
-    height: 300px;
-    background: linear-gradient(to right, #ecad6f, #fce4ec);
-    text-align: center;
+    height: 400px;
+        background:
+        linear-gradient(rgba(17, 19, 33, 0.8),
+                        rgba(17, 19, 33, 0.8)),
+        url("assets/images/banner.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.banner-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-bottom: 10px;
-    border-radius: 15px;
-    
+    height: 100%;
+    padding: 40px;
+    max-width: 650px;
 }
 
 .banner h1 {
-    color: #333;
-    font-size: 1em;
-    padding-top: 30px;
-    text-align: left;
-    padding-left: 20px;
-   
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(213, 136, 58, 0.2);
+    border: 1px solid rgba(213, 136, 58, 0.5);
+    border-radius: 999px;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    width: fit-content;
+    margin-left: 20px;
 }
 
-.banner h2 {
-    color: #333;
-    font-size: 1.5em;
-    padding-top: 10px;
-    text-align: left;
+.banner p {
+    color: #ffffff;
+    font-size: 2em;
+    max-width: 600px;
     padding-left: 20px;
+    text-align: left;
+    font-weight: bold;
+    line-height: 1.1;
+    margin-bottom: 2px;
+}
+
+.banner p2 {
+    color: #ffffff;
+    font-size: 1.25em;
+    max-width: 600px;
+    padding-left: 20px;
+    text-align: left;
+    line-height: 1.3;
+    margin-top: 0;
+
+}
+@media (max-width: 600px) {
+
+    .banner h2 {
+        font-size: 1.2rem;
+        max-width: 80%;
+    }
+
 }
 
 
 .topnav {
-    background-color: #333;
+    background-color: #ffffff;
     overflow: hidden;
     opacity: 0.8;
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
-    
+    border-bottom: 1px solid #faf0d4;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    
     
 }
 
@@ -73,9 +125,9 @@ body {
 
 .topnav a {
 
-    color: #f2f2f2;
+    color: #000000;
     text-align: center;
-    padding: 14px 14px;
+    padding: 18px 20px;
     text-decoration: none;
     font-size: 17px;
 }
@@ -94,7 +146,7 @@ body {
 
 
 .topnav a.active {
-    background-color: #d5883a;
+    background-color: #e18931;
     color: white;
 }
 
@@ -105,14 +157,14 @@ body {
     height: 100dvh;
     margin: 0;
     overflow: hidden;
-    background: #f6d9d0;
+    background: #fdfaf3;
     color: #333;
 }
 
 .search-page-body .topnav {
     z-index: 10;
     box-sizing: border-box;
-    min-height: var(--search-nav-height);
+    
 }
 
 .search-page {
@@ -124,7 +176,10 @@ body {
     height: 100%;
     min-height: 0;
     margin: 0 auto;
+    
     padding: calc(var(--search-nav-height) + 24px) clamp(18px, 4vw, 56px) 24px;
+
+
 }
 
 .search-heading {
@@ -137,7 +192,7 @@ body {
 
 .search-eyebrow {
     margin: 0 0 4px;
-    color: #d5883a;
+    color: #e18931;
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -198,8 +253,8 @@ body {
 }
 
 .search-sidebar input:focus-visible {
-    border-color: #d5883a;
-    outline: 3px solid rgba(213, 136, 58, 0.2);
+    border-color: #e18931;
+    outline: 3px solid rgba(225, 137, 49, 0.2);
 }
 
 .filter-heading {
@@ -220,7 +275,7 @@ body {
     padding: 4px 0;
     border: 0;
     background: none;
-    color: #d5883a;
+    color: #e18931;
     font: inherit;
     font-size: 0.85rem;
     cursor: pointer;
@@ -260,8 +315,8 @@ body {
 }
 
 .filter-option.active {
-    border-color: #d5883a;
-    background: #d5883a;
+    border-color: #e18931;
+    background: #e18931;
     color: #fff;
 }
 
@@ -400,13 +455,11 @@ dialog {
     }
 
 .aluminenupp {
-    background-color: #333;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    width: fit-content;
-    margin: 30px;
+    align-self: flex-start;
+    margin-top: auto;
     margin-left: 20px;
+    background-color: #e18931;
+    width: fit-content;
     border-radius: 15px;
 }
 
@@ -419,11 +472,16 @@ dialog {
     font-size: 17px;
 }
 
+.aluminenupp:hover {
+
+    transform: translateY(-3px);
+}
 
 .aluminenupp a:hover {
-    background-color: #ddd;
-    color: black;
+    background-color: #b86c1a;
+    color: rgb(254, 254, 254);
     border-radius: 15px;
+    
 }
 
 .prevent-select {
@@ -434,7 +492,7 @@ dialog {
 
 
 .aluminenupp a.active {
-    background-color: #d5883a;
+    background-color: #e18931;
     color: white;
 }
 
@@ -445,7 +503,7 @@ dialog {
 }
 
 .search-result:hover {
-    border-color: #d5883a;
+    border-color: #e18931;
     background-color: #fff5ef;
 }
 
@@ -513,7 +571,7 @@ dialog {
 
 .close-btn:hover {
     background-color: #ffffff;
-    color: #d5883a;
+    color: #b86c1a;
 }
 
 /* otsingukaardi hover efekt */
@@ -523,7 +581,7 @@ dialog {
 }
 
 .search-result:hover {
-    border-color: #d5883a;
+    border-color: #b86c1a;
     background-color: #fff5ef;
 }
 
@@ -536,7 +594,6 @@ dialog {
     overflow-y: auto; /* lisab kerimisriba kui retsept on pikk */
     background-color: #fff5ef;
     color: #333;
-    font-family: Arial, sans-serif;
     border: 2px solid #ecad6f;
     border-radius: 20px;
     padding: 30px;
@@ -569,9 +626,9 @@ dialog {
 }
 
 .close-btn:hover {
-    background-color: #d5883a;
+    background-color: #b86c1a;
     color: white;
-    border-color: #d5883a;
+    border-color: #b86c1a;
 }
 
 /* ülemine osa: pilt vasakul ja retsepti tekst paremal */
@@ -650,13 +707,13 @@ dialog {
 }
 
 .info-pill i {
-    color: #d5883a;
+    color: #e18931;
 }
 
 /* Raskustaseme tähtede värv */
 .star-filled,
 .star-empty {
-    color: #d5883a;
+    color: #e18931;
     font-size: 0.95rem;
 }
 
@@ -791,13 +848,14 @@ dialog {
 }
 
 .vaata-koike:hover {
-    color: #b86c1a;
+    color: #d5883a;
+    transform: translateY(-2px);
 }
 
 hr {
     border: none;
-    border-top: 1px solid #333;
-    margin: 20px;
+    border-top: 1px solid #bfbebe;
+    
 }
 
 .eelised {
@@ -822,11 +880,9 @@ hr {
     margin: 0 auto 20px;
     background: #f8ebc8;
     border-radius: 15px;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-size: 28px;
 }
 
@@ -845,7 +901,7 @@ hr {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
-    width: 90%;
+    width: 100%;
     margin: 50px auto;
 }
 
